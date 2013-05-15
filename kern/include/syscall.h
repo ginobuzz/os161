@@ -26,39 +26,31 @@
  * OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
  * SUCH DAMAGE.
  */
-
 #ifndef _SYSCALL_H_
 #define _SYSCALL_H_
 
 
-
-#include <types.h>
 #include <kern/unistd.h>
 #include <kern/errno.h>
 #include <kern/limits.h>
+#include <types.h>
 #include <lib.h>
+#include <proc.h>
 #include <addrspace.h>
 #include <thread.h>
-#include <proc.h>
 #include <current.h>
 #include <copyinout.h>
 #include <vm_region.h>
 
 
+struct trapframe;
 
-struct trapframe; /* from <machine/trapframe.h> */
 
-/*
- * The system call dispatcher.
- */
-
+/* Syscall dispatcher */
 void syscall(struct trapframe *tf);
 
-/*
- * Support functions.
- */
 
-/* Helper for fork(). You write this. */
+/* Helper for sys_fork */
 void enter_forked_process(struct trapframe *tf);
 
 /* Enter user mode. Does not return. */
@@ -66,20 +58,15 @@ void enter_new_process(int argc, userptr_t argv, vaddr_t stackptr,
 		       vaddr_t entrypoint);
 
 
-/*
- * Prototypes for IN-KERNEL entry points for system call implementations.
- */
-
-int sys_reboot(int code);
-int sys___time(userptr_t user_seconds, userptr_t user_nanoseconds);
-
+/* Kernel system-call prototypes */
+int 	sys_reboot(int code);
+int 	sys___time(userptr_t user_seconds, userptr_t user_nanoseconds);
 pid_t 	sys_fork(struct trapframe* tf, int* retval);
 pid_t 	sys_execv(userptr_t progname, userptr_t args);
 pid_t 	sys_getpid(void);
 pid_t	sys_waitpid(pid_t pid, int *status, int options, int* retval);
 void	sys_exit(int exitcode);
 int 	sys_sbrk(intptr_t amount, int32_t* retval);
-
 int 	sys_open(const char *filename, int flags, int32_t* retval);
 int 	sys_read(int filehandle, void *buf, size_t size, int32_t* retval);
 int 	sys_write(int filehandle, const void *buf, size_t size, int32_t* retval);
@@ -88,5 +75,6 @@ int 	sys_close(int filehandle);
 int 	sys_lseek(int filehandle, off_t position, int whence, off_t* retval);
 int 	sys_chdir(char* path);
 int 	sys___getcwd(char* buf, size_t size, int32_t* retval);
+
 
 #endif /* _SYSCALL_H_ */
