@@ -1,8 +1,0 @@
-#!/bin/bash
-chmod 755 mkpatch
-chmod 755 testpatch
-chmod 755 comp0
-chmod 755 comp1
-chmod 755 comp2
-chmod 755 comp2opt
-echo "Successful completion..."

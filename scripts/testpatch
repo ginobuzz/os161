@@ -1,8 +1,0 @@
-#!/bin/bash
-rm -rf /tmp/submit
-cd /tmp/
-git clone ssh://src@src.ops-class.org/src/os161 submit
-cd submit
-git checkout bad912f1
-git apply submit.patch
-echo "Successful completion..."

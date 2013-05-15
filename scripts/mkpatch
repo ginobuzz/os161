@@ -1,4 +1,0 @@
-#!/bin/bash
-cd ~/src
-git pull
-git diff 3921f597 > submit.patch
