@@ -154,7 +154,7 @@ thread_create(const char *name)
 	thread->t_cwd = NULL;
 
 	/* Parent Process */
-	thread->parent = NULL;
+	thread->process = NULL;
 
 	// initial t_priority
 	//thread->t_priority = NORMAL;

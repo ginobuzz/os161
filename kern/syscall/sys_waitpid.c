@@ -27,7 +27,7 @@ sys_waitpid(pid_t pid, int* status, int options, int* retval) {
 
 
 	// Are we are interested?
-	if(proc->ppid != curthread->parent->pid) {
+	if(proc->ppid != curthread->process->pid) {
 		*status = -1;
 		return ECHILD;//Not interested.
 	}

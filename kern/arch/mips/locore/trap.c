@@ -115,7 +115,7 @@ kill_curthread(vaddr_t epc, unsigned code, vaddr_t vaddr)
 	kprintf("Fatal user mode trap %u sig %d (%s, epc 0x%x, vaddr 0x%x)\n",
 		code, sig, trapcodenames[code], epc, vaddr);
 	//panic("I don't know how to handle this\n");
-	if (curthread->parent->pid==0) {
+	if (curthread->process->pid==0) {
 		panic("Error in init process thread\n");
 	} else {
 		sys_exit(-1);

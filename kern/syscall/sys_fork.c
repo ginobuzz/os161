@@ -38,7 +38,7 @@ entrypoint(void* arg1, unsigned long arg2) {
 	struct trapframe new_tf;
 
 	// Set child process's parent process.
-	curthread->parent = get_proc(data->c_pid);	
+	curthread->process = get_proc(data->c_pid);	
 
 	// Copy address space.
 	curthread->t_addrspace = data->addrs;
@@ -72,7 +72,7 @@ sys_fork(struct trapframe* tf, int32_t* retval) {
 	int 	err;
 
 	// Get current process's pid.
-	parent_pid = curthread->parent->pid;
+	parent_pid = curthread->process->pid;
 
 	// Create a new process (child).
 	child_pid = proc_create();

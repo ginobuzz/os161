@@ -25,7 +25,7 @@ int sys_open(const char *filename, int flags, int32_t* retval) {
 
 	// make sure we have an open file table index before we do anything else
 	int i = 0;
-	while(curthread->parent->ftable[i] != NULL && i<MAX_FILES) {
+	while(curthread->process->ftable[i] != NULL && i<MAX_FILES) {
 		i++;
 	}
 
@@ -68,7 +68,7 @@ int sys_open(const char *filename, int flags, int32_t* retval) {
 	// everything has succeeded, create the fdesc and return the file handle
 	fd = fdesc_create(rw_permissions,vn);
 
-	curthread->parent->ftable[i] = fd;	
+	curthread->process->ftable[i] = fd;	
 	
 	*retval = i;
 	return 0;

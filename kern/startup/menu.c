@@ -125,7 +125,7 @@ cmd_progthread(void *ptr, unsigned long nargs)
 	if(err < 0){
 		panic("[ERROR] Second process failed in cmd_progthread.\n");
 	}
-	curthread->parent = get_proc(pid);
+	curthread->process = get_proc(pid);
 
 
 	V(sem);
@@ -182,7 +182,7 @@ common_prog(int nargs, char **args)
 	int status = 0;
 	int retval = 0;
 	
-	sys_waitpid(thr->parent->pid, &status, 0, &retval);
+	sys_waitpid(thr->process->pid, &status, 0, &retval);
 
 
 	return 0;

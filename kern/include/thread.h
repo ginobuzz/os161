@@ -119,7 +119,7 @@ struct thread {
 	struct vnode *t_cwd;		/* current working directory */
 
 	/* Parent Process */
-	struct proc * parent;
+	struct proc* process;
 
 	/*
 	int t_priority;

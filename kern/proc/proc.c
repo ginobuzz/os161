@@ -31,7 +31,7 @@ struct lock* proc_lock;
 		panic("[ERROR] Init process failed to create.\n");
 	}
 
-	curthread->parent = get_proc(pid);
+	curthread->process = get_proc(pid);
 
 	// Define path to open std fdescs.
 	char str[] = "con:";

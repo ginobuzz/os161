@@ -31,8 +31,8 @@ int sys_dup2(int old_filehandle, int new_filehandle, int32_t* retval) {
 	}
 
 	// get the respective fdesc's from the file table
-	struct fdesc* fd_old = curthread->parent->ftable[old_filehandle];
-	struct fdesc* fd_new = curthread->parent->ftable[new_filehandle];
+	struct fdesc* fd_old = curthread->process->ftable[old_filehandle];
+	struct fdesc* fd_new = curthread->process->ftable[new_filehandle];
 
 	// make sure old fdesc is valid
 	if (fd_old==NULL) {
@@ -48,7 +48,7 @@ int sys_dup2(int old_filehandle, int new_filehandle, int32_t* retval) {
 	}
 
 	// set the old fdesc to the new fdesc
-	curthread->parent->ftable[new_filehandle] = fd_old;	
+	curthread->process->ftable[new_filehandle] = fd_old;	
 	fd_old->ref_count++;
 
 	// return the new filehandle

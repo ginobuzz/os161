@@ -31,7 +31,7 @@ int sys_read(int filehandle, void *buf, size_t size, int32_t* retval) {
 		return cpychk;
 */
 	// obtain the desired file descriptor from the process file table
-	struct fdesc* fd = curthread->parent->ftable[filehandle];
+	struct fdesc* fd = curthread->process->ftable[filehandle];
 	if (fd == NULL) {
 		return EBADF;
 	}

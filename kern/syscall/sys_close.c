@@ -20,13 +20,13 @@ int sys_close(int filehandle) {
 		return EBADF;
 	}
 
-	struct fdesc* fd = curthread->parent->ftable[filehandle];
+	struct fdesc* fd = curthread->process->ftable[filehandle];
 
 	if (fd==NULL)
 		return EBADF;
 
 	fdesc_destroy(fd);
-	curthread->parent->ftable[filehandle] = NULL;
+	curthread->process->ftable[filehandle] = NULL;
 
 	//if (fd->ref_count < 0) 
 	//	panic("sys_close yielded a ref_count of less than 0\n");

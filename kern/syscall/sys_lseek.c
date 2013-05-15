@@ -24,7 +24,7 @@ int sys_lseek(int filehandle, off_t position, int whence, off_t* retval) {
 	}
 
 	// get the appropriate fdesc, and make sure it is valid
-	struct fdesc* fd = curthread->parent->ftable[filehandle];
+	struct fdesc* fd = curthread->process->ftable[filehandle];
 	if (fd == NULL) {
 		return EBADF;
 	}

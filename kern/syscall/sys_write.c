@@ -21,10 +21,10 @@ int sys_write(int filehandle, const void *buf, size_t size, int32_t* retval) {
 		return EBADF;
 	}
 	// get file descriptor from file table
-	struct fdesc* fd = curthread->parent->ftable[filehandle];
+	struct fdesc* fd = curthread->process->ftable[filehandle];
 	
 
-	if(curthread->parent == NULL){
+	if(curthread->process == NULL){
 		kprintf("[ERROR] in sys_write, curthread->parent is NULL.\n");
 	}
 

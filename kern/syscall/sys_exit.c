@@ -9,7 +9,7 @@ sys_exit(int exitcode) {
 
 	KASSERT(curthread->t_addrspace != NULL);
 
-	struct proc* proc = curthread->parent;
+	struct proc* proc = curthread->process;
 
 	//Set exitcode.
 	proc->exit_code = exitcode;
