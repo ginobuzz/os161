@@ -1,0 +1,10 @@
+#!/bin/bash
+echo off
+cd ~/src/kern/conf/
+./config ASST3
+cd ../compile/ASST3
+bmake depend
+bmake
+bmake install
+echo on
+echo "Successful completion..."
